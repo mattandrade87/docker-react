@@ -1,20 +1,20 @@
+version: "3"
 services:
   web:
-    build: 
-      #context -> especifica aonde queremos que todas os arquivos e pastas do projeto sejam extraidos
+    build:
       context: .
       dockerfile: Dockerfile.dev
     ports:
-      - "3000:3000" 
+      - "3000:3000"
     volumes:
-      - /app/node_modules
-      - .:/app 
-      #: -> mapear a app folder fora do container, para a app folder dentro do container
+      - /home/node/app/node_modules
+      - .:/home/node/app
   tests:
-    build: 
+    stdin_open: true
+    build:
       context: .
       dockerfile: Dockerfile.dev
     volumes:
-      - /app/node_modules
-      - .:/app 
+      - /home/node/app/node_modules
+      - .:/home/node/app
     command: ["npm", "run", "test"]
